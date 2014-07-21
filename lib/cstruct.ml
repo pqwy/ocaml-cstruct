@@ -142,22 +142,22 @@ let blit_to_string src srcoff dst dstoff len =
 
 let set_uint8 t i c =
   if i >= t.len || i < 0 then raise (Invalid_argument (invalid_bounds i 1)) ;
-  EndianBigstring.BigEndian.set_int8 t.buffer (t.off+i) c
+  EndianBigstring.BigEndian_unsafe.set_int8 t.buffer (t.off+i) c
 
 let set_char t i c =
   if i >= t.len || i < 0 then raise (Invalid_argument (invalid_bounds i 1)) ;
-  EndianBigstring.BigEndian.set_char t.buffer (t.off+i) c
+  EndianBigstring.BigEndian_unsafe.set_char t.buffer (t.off+i) c
 
 let get_uint8 t i =
   if i >= t.len || i < 0 then raise (Invalid_argument (invalid_bounds i 1)) ;
-  EndianBigstring.BigEndian.get_uint8 t.buffer (t.off+i)
+  EndianBigstring.BigEndian_unsafe.get_uint8 t.buffer (t.off+i)
 
 let get_char t i =
   if i >= t.len || i < 0 then raise (Invalid_argument (invalid_bounds i 1)) ;
-  EndianBigstring.BigEndian.get_char t.buffer (t.off+i)
+  EndianBigstring.BigEndian_unsafe.get_char t.buffer (t.off+i)
 
 module BE = struct
-  open EndianBigstring.BigEndian
+  open EndianBigstring.BigEndian_unsafe
 
   let set_uint16 t i c =
     if (i+2) > t.len || i < 0 then raise (Invalid_argument (invalid_bounds i 2));
@@ -185,7 +185,7 @@ module BE = struct
 end
 
 module LE = struct
-  open EndianBigstring.LittleEndian
+  open EndianBigstring.LittleEndian_unsafe
 
   let set_uint16 t i c =
     if (i+2) > t.len || i < 0 then raise (Invalid_argument (invalid_bounds i 2));
