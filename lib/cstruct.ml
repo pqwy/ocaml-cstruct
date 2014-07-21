@@ -157,7 +157,7 @@ let get_char t i =
   EndianBigstring.BigEndian.get_char t.buffer (t.off+i)
 
 module BE = struct
-  include EndianBigstring.BigEndian
+  open EndianBigstring.BigEndian
 
   let set_uint16 t i c =
     if (i+2) > t.len || i < 0 then raise (Invalid_argument (invalid_bounds i 2));
@@ -185,7 +185,7 @@ module BE = struct
 end
 
 module LE = struct
-  include EndianBigstring.LittleEndian
+  open EndianBigstring.LittleEndian
 
   let set_uint16 t i c =
     if (i+2) > t.len || i < 0 then raise (Invalid_argument (invalid_bounds i 2));
