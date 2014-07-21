@@ -212,6 +212,41 @@ module LE = struct
     get_int64 t.buffer (t.off+i)
 end
 
+module Unsafe = struct
+
+  module BE = struct
+    open EndianBigstring.BigEndian_unsafe
+
+    let set_uint16 t i c = set_int16 t.buffer (t.off+i) c
+    let set_uint32 t i c = set_int32 t.buffer (t.off+i) c
+    let set_uint64 t i c = set_int64 t.buffer (t.off+i) c
+
+    let get_uint16 t i = get_uint16 t.buffer (t.off+i)
+    let get_uint32 t i = get_int32 t.buffer (t.off+i)
+    let get_uint64 t i = get_int64 t.buffer (t.off+i)
+  end
+
+  module LE = struct
+    open EndianBigstring.LittleEndian_unsafe
+
+    let set_uint16 t i c = set_int16 t.buffer (t.off+i) c
+    let set_uint32 t i c = set_int32 t.buffer (t.off+i) c
+    let set_uint64 t i c = set_int64 t.buffer (t.off+i) c
+
+    let get_uint16 t i = get_uint16 t.buffer (t.off+i)
+    let get_uint32 t i = get_int32 t.buffer (t.off+i)
+    let get_uint64 t i = get_int64 t.buffer (t.off+i)
+  end
+
+  open EndianBigstring.BigEndian_unsafe
+
+  let set_uint8 t i c = set_int8 t.buffer (t.off+i) c
+  let set_char t i c = set_char t.buffer (t.off+i) c
+
+  let get_uint8 t i = get_uint8 t.buffer (t.off+i)
+  let get_char t i = get_char t.buffer (t.off+i)
+end
+
 let len t =
   t.len
 

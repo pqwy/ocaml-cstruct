@@ -369,6 +369,91 @@ module LE : sig
 
 end
 
+module Unsafe : sig
+
+  (** Unsafe version of the getter/setter suite.
+      Can cause arbitrary behavior
+      when used to for an out-of-bounds array access *)
+
+  val get_char: t -> int -> char
+  (** [get_char t off] returns the character contained in the cstruct
+      at offset [off]. *)
+
+  val get_uint8: t -> int -> uint8
+  (** [get_uint8 t off] returns the byte contained in the cstruct
+      at offset [off]. *)
+
+  val set_char: t -> int -> char -> unit
+  (** [set_char t off c] sets the byte contained in the cstruct
+      at offset [off] to character [c]. *)
+
+  val set_uint8: t -> int -> uint8 -> unit
+  (** [set_uint8 t off c] sets the byte contained in the cstruct
+      at offset [off] to byte [c]. *)
+
+  module BE : sig
+
+    (** Get/set big-endian integers of various sizes. The second
+        argument of those functions is the position relative to the
+        current offset of the cstruct. *)
+
+    val get_uint16: t -> int -> uint16
+    (** [get_uint16 cstr off] is the 16 bit long big-endian unsigned
+        integer stored in [cstr] at offset [off]. *)
+
+    val get_uint32: t -> int -> uint32
+    (** [get_uint32 cstr off] is the 32 bit long big-endian unsigned
+        integer stored in [cstr] at offset [off]. *)
+
+    val get_uint64: t -> int -> uint64
+    (** [get_uint64 cstr off] is the 64 bit long big-endian unsigned
+        integer stored in [cstr] at offset [off]. *)
+
+    val set_uint16: t -> int -> uint16 -> unit
+    (** [set_uint16 cstr off i] writes the 16 bit long big-endian
+        unsigned integer [i] at offset [off] of [cstr]. *)
+
+    val set_uint32: t -> int -> uint32 -> unit
+    (** [set_uint32 cstr off i] writes the 32 bit long big-endian
+        unsigned integer [i] at offset [off] of [cstr]. *)
+
+    val set_uint64: t -> int -> uint64 -> unit
+    (** [set_uint64 cstr off i] writes the 64 bit long big-endian
+        unsigned integer [i] at offset [off] of [cstr]. *)
+  end
+
+  module LE : sig
+
+    (** Get/set little-endian integers of various sizes. The second
+        argument of those functions is the position relative to the *)
+
+    val get_uint16: t -> int -> uint16
+    (** [get_uint16 cstr off] is the 16 bit long little-endian unsigned
+        integer stored in [cstr] at offset [off]. *)
+
+    val get_uint32: t -> int -> uint32
+    (** [get_uint32 cstr off] is the 32 bit long little-endian unsigned
+        integer stored in [cstr] at offset [off]. *)
+
+    val get_uint64: t -> int -> uint64
+    (** [get_uint64 cstr off] is the 64 bit long little-endian unsigned
+        integer stored in [cstr] at offset [off]. *)
+
+    val set_uint16: t -> int -> uint16 -> unit
+    (** [set_uint16 cstr off i] writes the 16 bit long little-endian
+        unsigned integer [i] at offset [off] of [cstr]. *)
+
+    val set_uint32: t -> int -> uint32 -> unit
+    (** [set_uint32 cstr off i] writes the 32 bit long little-endian
+        unsigned integer [i] at offset [off] of [cstr]. *)
+
+    val set_uint64: t -> int -> uint64 -> unit
+    (** [set_uint64 cstr off i] writes the 64 bit long little-endian
+        unsigned integer [i] at offset [off] of [cstr]. *)
+  end
+
+end
+
 (** {2 List of buffers} *)
 
 val lenv: t list -> int
